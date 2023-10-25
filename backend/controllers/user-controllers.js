@@ -211,6 +211,50 @@ const report= async (req, res) => {
   return res.status(201).json({ message: report });
 };
 
+
+
+const updateProfile = async (req, res) => {
+  const userId = req.id; // Assuming you have middleware to verify the user's token and set `req.id`.
+
+  const {
+    firstname,
+    lastname,
+    email,
+    contact,
+    password, // You may want to handle password updates separately for security reasons.
+  } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update the user's data with the new values
+    if (firstname) user.firstname = firstname;
+    if (lastname) user.lastname = lastname;
+    if (email) user.email = email;
+    if (contact) user.contact = contact;
+
+    // Handle password update separately for security
+    if (password) {
+      const newPassword = bcrypt.hashSync(password);
+      user.password = newPassword;
+    }
+
+    await user.save();
+
+    return res.status(200).json({ message: "User profile updated successfully" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error updating user profile" });
+  }
+};
+
+exports.updateProfile = updateProfile;
+
+
 exports.logout = logout;
 exports.register = register;
 exports.login = login;

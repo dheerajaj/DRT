@@ -1,182 +1,30 @@
-
-
-import React, { useState, useEffect } from 'react';
-
-
-
-import Navbar from '../Navbar';
-
-import axios from 'axios';
-
- 
-
-const ReportListPage = () => {
-
-  const [reports, setReportsData] = useState([]);
-
-  const [searchTerm, setSearchTerm] = useState('');
-
- 
-
-  useEffect(() => {
-
-    axios.get('http://192.168.68.43:8000/api/v1/allreports')
-
-      .then(response => {
-
-        console.log('API response:', response.data);
-
-        setReportsData(response.data);
-
-      })
-
-      .catch(error => {
-
-        console.error('Failed to fetch report data:', error);
-
-      });
-
-  }, []);
-
- 
-
- 
-
-  const filteredReports = reports.filter(report => {
-
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-
-    return (
-
-      report.date.toLowerCase().includes(lowerCaseSearchTerm) ||
-
-      report.project.toLowerCase().includes(lowerCaseSearchTerm)
-
-    );
-
-  });
-
- 
-
-  return (
-
-    <>
-
-      <Navbar />
-
-      <div className="report-list">
-
-        <h2>Report List</h2>
-
-        <input
-
-          type="text"
-
-          placeholder="Search by Date or Project Name"
-
-          value={searchTerm}
-
-          onChange={(e) => setSearchTerm(e.target.value)}
-
-        />
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              {/* <th>id</th>
-
-              <th>Name</th> */}
-
-              <th>Date</th>
-
-              <th>Project Name</th>
-
-              <th>Today's task Report</th>
-
-              <th>Plan for Tomorrow</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            {filteredReports.map((report, index) => (
-
-              <tr key={report.id || index}>
-
-                <td>{report._id}</td>
-
-                <td>{report.name}</td>
-
-                <td>{report.project}</td>
-
-                <td>{report.date}</td>
-
-                <td>{report.time}</td>
-
-                <td>{report.discription}</td>
-
-              </tr>
-
-            ))}
-
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </>
-
-  );
-
-};
-
- 
-
-export default ReportListPage;
-
 // import React, { useState, useEffect } from 'react';
-// import './ReportListPage.css';
 // import Navbar from '../Navbar';
-
-// const ReportListPage = (props) => {
-//   const data = props.ds;
-
-//   console.warn(data);
-
-//   const [reportsData, setReportsData] = useState([]); 
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [reportsPerPage] = useState(10);
+// import axios from 'axios';
+// const ReportListPage = () => {
+//   const [reports, setReportsData] = useState([]);
 //   const [searchTerm, setSearchTerm] = useState('');
-//   const [filteredReports, setFilteredReports] = useState([]);
-//   const [currentReports, setCurrentReports] = useState([]);
-
+ 
 //   useEffect(() => {
-    
-//     if (reportsData) {
-//       const filtered = reportsData.filter(
-//         (report) =>
-//           report.date.includes(searchTerm) || report.projectName.includes(searchTerm)
-//       );
-//       setFilteredReports(filtered);
-
-//       const indexOfLastReport = currentPage * reportsPerPage;
-//       const indexOfFirstReport = indexOfLastReport - reportsPerPage;
-//       setCurrentReports(filtered.slice(indexOfFirstReport, indexOfLastReport));
-//     }
-//   }, [searchTerm, reportsData, currentPage, reportsPerPage]);
-
-//   const paginate = (pageNumber) => {
-//     setCurrentPage(pageNumber);
-//   };
-
+//     axios.get('http://localhost:8000/api/getreports')
+//       .then(response => {
+//         console.log('API response:', response.data);
+//         setReportsData(response.data);
+//       })
+//       .catch(error => {
+//         console.error('Failed to fetch report data:', error);
+//       });
+//   }, []);
+//   const filteredReports = reports.filter(report => {
+//     const lowerCaseSearchTerm = searchTerm.toLowerCase();
+//     return (
+//       report.date.toLowerCase().includes(lowerCaseSearchTerm) ||
+//       report.project.toLowerCase().includes(lowerCaseSearchTerm)
+//     );
+//   });
 //   return (
-//     <>
+//    <>
+
 //       <Navbar />
 //       <div className="report-list">
 //         <h2>Report List</h2>
@@ -189,37 +37,160 @@ export default ReportListPage;
 //         <table>
 //           <thead>
 //             <tr>
+              
 //               <th>Date</th>
-//               <th>Name</th>
 //               <th>Project Name</th>
-//               <th>Hours Worked</th>
-//               <th>Comments</th>
+//               <th>Today's task Report</th>
+//               <th>Plan for Tomorrow</th>
 //             </tr>
 //           </thead>
 //           <tbody>
-//             {currentReports.map((info, index) => (
-//               <tr key={index}>
-//                 <td>{info.date}</td>
-//                 <td>{info.name}</td>
-//                 <td>{info.projectName}</td>
-//                 <td>{info.hoursWorked}</td>
-//                 <td>{info.comments}</td>
+//             {filteredReports.map((report, index) => (
+//               <tr key={report.id || index}>
+//                 <td>{report._id}</td>
+//                 <td>{report.name}</td>
+//                 <td>{report.project}</td>
+//                 <td>{report.date}</td>
+//                 <td>{report.time}</td>
+//                <td>{report.discription}</td>
 //               </tr>
 //             ))}
 //           </tbody>
 //         </table>
-//         <div className="pagination">
-//           {Array.from({ length: Math.ceil(filteredReports.length / reportsPerPage) }).map(
-//             (_, index) => (
-//               <button key={index} onClick={() => paginate(index + 1)}>
-//                 {index + 1}
-//               </button>
-//             )
-//           )}
-//         </div>
 //       </div>
 //     </>
 //   );
 // };
 
 // export default ReportListPage;
+
+
+import * as React from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import Navbar from '../Navbar'
+
+const ReportListPage = () => {
+const columns = [
+  { id: 'name', label: 'Name', minWidth: 170 },
+  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  {
+    id: 'population',
+    label: 'Population',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'size',
+    label: 'Size\u00a0(km\u00b2)',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'density',
+    label: 'Density',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toFixed(2),
+  },
+];
+
+function createData(name, code, population, size) {
+  const density = population / size;
+  return { name, code, population, size, density };
+}
+
+const rows = [
+  createData('India', 'IN', 1324171354, 3287263),
+  createData('China', 'CN', 1403500365, 9596961),
+  createData('Italy', 'IT', 60483973, 301340),
+  createData('United States', 'US', 327167434, 9833520),
+  createData('Canada', 'CA', 37602103, 9984670),
+  createData('Australia', 'AU', 25475400, 7692024),
+  createData('Germany', 'DE', 83019200, 357578),
+  createData('Ireland', 'IE', 4857000, 70273),
+  createData('Mexico', 'MX', 126577691, 1972550),
+  createData('Japan', 'JP', 126317000, 377973),
+  createData('France', 'FR', 67022000, 640679),
+  createData('United Kingdom', 'GB', 67545757, 242495),
+  createData('Russia', 'RU', 146793744, 17098246),
+  createData('Nigeria', 'NG', 200962417, 923768),
+  createData('Brazil', 'BR', 210147125, 8515767),
+];
+
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  return (
+    <>
+    <Navbar />
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+    </>
+  );
+}
+export default ReportListPage;

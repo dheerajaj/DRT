@@ -22,9 +22,7 @@ const reportSchema = new mongoose.Schema({
     type: String,
     enum: ['Yes', 'No'],
   },
-  explanation: {
-    type: String,
-  },
+ 
   plans: {
     type: String,
   },

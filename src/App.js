@@ -7,6 +7,7 @@ import DashboardPage from './component/pages/DashboardPage'
 import ReportSubmissionForm from './component/pages/ReportSubmissionForm'
 import ReportListPage from './/component/pages/ReportListPage'
 import ContactUs from './component/pages/ContactUs'
+import Profile from './component/pages/Profile';
 
 
 
@@ -22,10 +23,9 @@ function App() {
                             <Route path='/login' element={<Home/>}></Route>
                             <Route path='/register' element={<Register />} />
                             <Route path='/login/dashboard' element={<DashboardPage />} />
-                            
-                            <Route path='dashboard/list' element={<ReportListPage />} />
-                            <Route path='dashboard/reportsub' element={<ReportSubmissionForm />} />
-                            
+                            <Route path='/dashboard/list' element={<ReportListPage />} />
+                            <Route path='/dashboard/reportsub' element={<ReportSubmissionForm />} />
+                            <Route path='/dashboard/userProfile' element={<Profile></Profile>}></Route>
                             <Route path='/contact-us' element={<ContactUs/>} />
                             
                   </Routes>

@@ -10,7 +10,6 @@ function ReportSubmissionForm() {
     status_update: '',
     obstacles: 'On Track',
     needs_clarification: 'No',
-    explanation: '',
     plans: '',
     attachment: null,
   });
@@ -29,7 +28,7 @@ function ReportSubmissionForm() {
       ...formData,
       attachment: e.target.files[0],
     });
-  };
+  }
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -64,7 +63,6 @@ function ReportSubmissionForm() {
           status_update: '',
           obstacles: 'On Track',
           needs_clarification: 'No',
-          explanation: '',
           plans: '',
           attachment: null,
         });
@@ -115,19 +113,7 @@ function ReportSubmissionForm() {
             <option value="At Risk">At Risk</option>
             <option value="Off Track">Off Track</option>
           </select>
-          {formData.needs_clarification === 'Yes' && (
-            <div>
-              <h2 >Explain If Yes</h2>
-              <textarea
-                id='txt2'
-                name="explanation"
-                rows="4"
-                cols="50"
-                value={formData.explanation}
-                onChange={handleInputChange}
-              ></textarea>
-            </div>
-          )};
+         
           <h2 >What Are Your Plans for Tomorrow?</h2>
           <textarea
             id='txt3'

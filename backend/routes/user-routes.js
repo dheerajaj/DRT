@@ -7,6 +7,7 @@ const {
     getUser,
     refreshToken,
     logout,
+    updateProfile,
 } = require("../controllers/user-controllers");
 const { getReports,
     Report } = require("../controllers/report-controllers");
@@ -22,7 +23,9 @@ const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
+router.get("/getUser", getUser)
 router.get("/user", verifyToken, getUser);
+router.put("/updateUser",updateProfile)
 router.get("/refresh", refreshToken, verifyToken, getUser);
 router.post("/logout", verifyToken, logout);
 

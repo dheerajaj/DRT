@@ -7,7 +7,7 @@ const Report = async (req, res) => {
         status_update,
         obstacles,
         need_clarification,
-        explanation,
+       
         plans,
         attacment, } = req.body;
    
@@ -18,7 +18,7 @@ const Report = async (req, res) => {
         status_update,
         obstacles,
         need_clarification,
-        explanation,
+       
         plans,
         attacment,
     });
